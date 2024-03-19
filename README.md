@@ -10,7 +10,7 @@ This site is inspired by **[Itty bitty](https://github.com/alcor/itty-bitty).**
 
 Learn more:  [GitHub](https://github.com/dew-automatisation/website-single-link)
 
-[⮞ Create a new site ! ⮜](./editor.html)
+[⮞ Create a new site ! ⮜](https://site.devenirentrepreneurweb.fr/editor.html)
 
 
 
