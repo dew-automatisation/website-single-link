@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML to Base64 Converter with Compression</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+        }
+        #inputText, #outputBase64, #outputUrl {
+            width: 80%;
+            margin-top: 10px;
+            height: 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="inputText" placeholder="Enter HTML, Markdown or any text here"></textarea>
+    <button onclick="convertToCompressedURI()">Convert</button>
+    <p>Compressed Output:</p>
+    <textarea id="outputBase64"></textarea>
+    <p>URL with Compressed Text:</p>
+    <textarea id="outputUrl"></textarea>
+    <p id="urlByteSize">Taille de l'URL: 0 bytes</p> <!-- Élément pour afficher la taille en bytes -->
+
+    <script>
+        function convertToCompressedURI() {
+            var inputText = document.getElementById('inputText').value;
+            var compressed = LZString.compressToEncodedURIComponent(inputText);
+            document.getElementById('outputBase64').value = compressed;
+            
+            // Modification pour pointer vers 'index.html' dans le même dossier
+            var currentUrl = window.location.href;
+            var baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")) + "/index.html";
+            var finalUrl = baseUrl + '#' + compressed;
+            document.getElementById('outputUrl').value = finalUrl;
+            
+            // Calcul et affichage de la taille de l'URL en bytes
+            var byteSize = new Blob([finalUrl]).size;
+            document.getElementById('urlByteSize').innerText = 'Taille de l\'URL: ' + byteSize + ' bytes';
+        }
+    </script>
+</body>
+</html>

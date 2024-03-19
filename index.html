@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decompress Markdown and View Content</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+    <!-- Include Showdown library -->
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+	<style type="text/css">
+
+
+body{margin:40px
+auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0
+10px}h1,h2,h3{line-height:1.2}
+
+
+/* Appliquer les polices et les styles d'en-tête avec les tailles spécifiques */
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  margin:0;
+}
+
+
+
+</style>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+    function decompressAndDisplayMarkdown() {
+        // Vérifie si l'URL contient un fragment
+        if (!window.location.hash) {
+            // Si non, utilisez le contenu par défaut
+            const defaultCompressedURI = "MQAgmg9grgTiDqBTARgZwJYBdEgCLpkQGNMAbATxHQDsQBDEAZRoHNScAZGgawCheAVAKRosiALQZqbCaR5CQGbKnqEQRCNUx0aiACYgA+oi0FEFQyADuWABY0QmW4gIgIV2nOrcAdCAAUAJLURKRQeqyO9iqaiACEAJQgACrRIAC2iHTUKk6I5ADkhD4l-IC8G4A9O0IAChAw2sjsCuIg5NAgepoFmCDUiPr0iogwAG7DjhAgthCoPXnpICC8ZYCCOzUw6CN02M29EE6R6CqoJnMQgMgEdYqYdQOa54YHqJYno+NLgEMkgPB-QgCydDBuJ0PLsrBtsK1oHAAA50Fg4GxODIAoHuWhXAASyV+HH4qSOijEVBUNFQ0LMBmQlCEAG1AphMJRkFhGQBdfy2BnQ1AALgA9HyWHYoMgfBp0ny6KQNDA+SzyOJmQzyAkfEJ+BwsjBaOlbjzFjSAOJYDEi9mczDc-mC4Wi8V8vSIKziOhQG7pbZHT2aPlWFBKCRSGTiLzcBL8AA8RFOwwAfLwaYA86hAAGFCNscAw+lZCRC4iBADnU7J8fP0WDqPk56VI4YjfOjWjj-F4QA";
+            const decompressedMarkdown = LZString.decompressFromEncodedURIComponent(defaultCompressedURI);
+            const converter = new showdown.Converter();
+            const htmlContent = converter.makeHtml(decompressedMarkdown);
+            document.getElementById('content').innerHTML = htmlContent;
+        } else {
+            // Extract the encoded compressed text from the URL fragment (hash)
+            const compressedURI = window.location.hash.substr(1);
+            // Decompress the text
+            const decompressedMarkdown = LZString.decompressFromEncodedURIComponent(compressedURI);
+            // Initialize Showdown converter
+            const converter = new showdown.Converter();
+            // Convert Markdown to HTML
+            const htmlContent = converter.makeHtml(decompressedMarkdown);
+            // Display the HTML content
+            document.getElementById('content').innerHTML = htmlContent;
+        }
+    }
+
+    // Wait for the DOM to be fully loaded before converting and displaying the Markdown
+    window.addEventListener('DOMContentLoaded', (event) => {
+        decompressAndDisplayMarkdown();
+    });
+</script>
+
+</body>
+</html>
