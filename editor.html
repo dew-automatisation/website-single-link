@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertisseur HTML vers Base64 avec Compression</title>
+    <title>HTML to Base64 Converter with Compression</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 </head>
@@ -11,18 +11,19 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <textarea id="inputText" class="form-control" rows="4" placeholder="Entrez du HTML, du Markdown ou n'importe quel texte ici"></textarea>
-            <button onclick="convertToCompressedURI()" class="btn btn-primary btn-block mt-3">Convertir</button>
+		    <h1 id="ceciestuntest">WebPage creator</h1>
+            <textarea id="inputText" class="form-control" rows="4" placeholder="Enter HTML, Markdown, or any text here"></textarea>
+            <button onclick="convertToCompressedURI()" class="btn btn-primary btn-block mt-3">Convert</button>
             <div class="mt-4">
-                <h5>Sortie Compressée:</h5>
+                <h5>Compressed content:</h5>
                 <textarea id="outputBase64" class="form-control" rows="2" readonly></textarea>
             </div>
             <div class="mt-3">
-                <h5>URL avec Texte Compressé:</h5>
+                <h5>URL of the page:</h5>
                 <textarea id="outputUrl" class="form-control" rows="2" readonly></textarea>
-                <button onclick="copyToClipboard()" class="btn btn-secondary btn-block mt-2">Copier l'URL</button>
+                <button onclick="copyToClipboard()" class="btn btn-secondary btn-block mt-2">Copy the URL</button>
             </div>
-            <p id="urlByteSize" class="text-center mt-3">Taille de l'URL: 0 bytes</p>
+            <p id="urlByteSize" class="text-center mt-3">URL size: 0 bytes</p>
         </div>
     </div>
 </div>
