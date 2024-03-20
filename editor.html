@@ -22,6 +22,7 @@
                 <h5>URL of the page:</h5>
                 <textarea id="outputUrl" class="form-control" rows="2" readonly></textarea>
                 <button onclick="copyToClipboard()" class="btn btn-secondary btn-block mt-2">Copy the URL</button>
+                <button onclick="generateQRCode()" class="btn btn-info btn-block mt-2">Generate QR Code</button>
             </div>
             <p id="urlByteSize" class="text-center mt-3">URL size: 0 bytes</p>
         </div>
@@ -47,8 +48,13 @@
         var urlToCopy = document.getElementById('outputUrl');
         urlToCopy.select();
         document.execCommand('copy');
-        // Pour les navigateurs modernes, utilisez navigator.clipboard.writeText
-        // navigator.clipboard.writeText(urlToCopy.value).then(() => alert('URL copied to clipboard!'));
+    }
+    
+    function generateQRCode() {
+        var finalUrl = document.getElementById('outputUrl').value;
+        var encodedUrl = encodeURIComponent(finalUrl);
+        var qrCodeUrl = 'https://chart.googleapis.com/chart?cht=qr&chs=512x512&chld=L|1&choe=UTF-8&chl=' + encodedUrl;
+        window.open(qrCodeUrl, '_blank');
     }
 </script>
 </body>
