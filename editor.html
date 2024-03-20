@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>HTML to Base64 Converter with Compression</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertisseur HTML vers Base64 avec Compression</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-    <style>
-        body {
-            text-align: center;
-            margin-top: 50px;
-            font-family: Arial, sans-serif;
-        }
-        #inputText, #outputBase64, #outputUrl {
-            width: 80%;
-            margin-top: 10px;
-            height: 100px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        button {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
-    <textarea id="inputText" placeholder="Enter HTML, Markdown or any text here"></textarea>
-    <button onclick="convertToCompressedURI()">Convert</button>
-    <p>Compressed Output:</p>
-    <textarea id="outputBase64"></textarea>
-    <p>URL with Compressed Text:</p>
-    <textarea id="outputUrl"></textarea>
-    <p id="urlByteSize">Taille de l'URL: 0 bytes</p> <!-- Élément pour afficher la taille en bytes -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <textarea id="inputText" class="form-control" rows="4" placeholder="Entrez du HTML, du Markdown ou n'importe quel texte ici"></textarea>
+            <button onclick="convertToCompressedURI()" class="btn btn-primary btn-block mt-3">Convertir</button>
+            <div class="mt-4">
+                <h5>Sortie Compressée:</h5>
+                <textarea id="outputBase64" class="form-control" rows="2" readonly></textarea>
+            </div>
+            <div class="mt-3">
+                <h5>URL avec Texte Compressé:</h5>
+                <textarea id="outputUrl" class="form-control" rows="2" readonly></textarea>
+                <button onclick="copyToClipboard()" class="btn btn-secondary btn-block mt-2">Copier l'URL</button>
+            </div>
+            <p id="urlByteSize" class="text-center mt-3">Taille de l'URL: 0 bytes</p>
+        </div>
+    </div>
+</div>
 
-    <script>
-        function convertToCompressedURI() {
-            var inputText = document.getElementById('inputText').value;
-            var compressed = LZString.compressToEncodedURIComponent(inputText);
-            document.getElementById('outputBase64').value = compressed;
-            
-            // Modification pour pointer vers 'index.html' dans le même dossier
-            var currentUrl = window.location.href;
-            var baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")) + "/index.html";
-            var finalUrl = baseUrl + '#' + compressed;
-            document.getElementById('outputUrl').value = finalUrl;
-            
-            // Calcul et affichage de la taille de l'URL en bytes
-            var byteSize = new Blob([finalUrl]).size;
-            document.getElementById('urlByteSize').innerText = 'Taille de l\'URL: ' + byteSize + ' bytes';
-        }
-    </script>
+<script>
+    function convertToCompressedURI() {
+        var inputText = document.getElementById('inputText').value;
+        var compressed = LZString.compressToEncodedURIComponent(inputText);
+        document.getElementById('outputBase64').value = compressed;
+        
+        var currentUrl = window.location.href;
+        var baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")) + "/index.html";
+        var finalUrl = baseUrl + '#' + compressed;
+        document.getElementById('outputUrl').value = finalUrl;
+        
+        var byteSize = new Blob([finalUrl]).size;
+        document.getElementById('urlByteSize').innerText = 'Taille de l\'URL: ' + byteSize + ' bytes';
+    }
+
+    function copyToClipboard() {
+        var urlToCopy = document.getElementById('outputUrl');
+        urlToCopy.select();
+        document.execCommand('copy');
+        // Pour les navigateurs modernes, utilisez navigator.clipboard.writeText
+        // navigator.clipboard.writeText(urlToCopy.value).then(() => alert('URL copied to clipboard!'));
+    }
+</script>
 </body>
 </html>
