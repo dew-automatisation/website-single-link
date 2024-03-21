@@ -2,67 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Website in URL</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-    <!-- Include Showdown library -->
     <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-	<style type="text/css">
-
-
-body{margin:10px
-auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0
-10px}h1,h2,h3{line-height:1.2}
-
-
-/* Appliquer les polices et les styles d'en-tête avec les tailles spécifiques */
-h1, h2, h3, h4, h5, h6 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  margin:0;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-
-
-</style>
+    <style type="text/css">
+        body { margin: 10px auto; max-width: 650px; line-height: 1.6; font-size: 18px; color: #444; padding: 0 10px }
+        h1, h2, h3 { line-height: 1.2 }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, 
+            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0;
+        }
+        img { max-width: 100%; height: auto; }
+    </style>
 </head>
 <body>
     <div id="content"></div>
 
     <script>
-    function decompressAndDisplayMarkdown() {
-        // Vérifie si l'URL contient un fragment
-        if (!window.location.hash) {
-            // Si non, utilisez le contenu par défaut
-            const defaultCompressedURI = "MQAgmg9grgTiDqBTARgZwJYBdEgCLpkQGNMAbATxHQDsQBDEAZRoHNScAZGgawCheAVAKRosiALQZqbCaR5CQyKOlIATEOWhwRGbHgLEylGvSat2ILtW4A6foF4NwD07QgAoQYmOsnYLxG6CCqENQA5Jgg1IiI6gyoiDAAbvEgmBAgABYQqOGY6YgAtiAgvPaAgjuuMOgJdNi+ERC5rFSoIHHUORCAyATuramE6sGdAPqNqEOt8UlwxYBDJIDwf0IAsnQw3EEA7tR165V6mrAgAA50LDjrWOkg+StrEJsgPQASACqLHPzP6egtujjfVNRUIcDOpkJQhABtACSmEwlGQWDhAF0ABTpWGHVAALgA9DiWBcoMgbEQIPkcXRSKSYDjEeRxAjYeQAJQ2IT8DiIFa0fLuRBYooQgDiWEeRNR6MwmNx+MJxNJ5NUiHW4joUFS10w3xq6GCOPWKF+knMsh4zP4AB4iIh2vEAHy8CGAPOoQABhQg1HAMSLrVpiEAAQhAgBzqVE2HHRLDuGzo-Kkc0WnHW20wB38IA";
-            const decompressedMarkdown = LZString.decompressFromEncodedURIComponent(defaultCompressedURI);
-            const converter = new showdown.Converter();
-            const htmlContent = converter.makeHtml(decompressedMarkdown);
-            document.getElementById('content').innerHTML = htmlContent;
-        } else {
-            // Extract the encoded compressed text from the URL fragment (hash)
+        function decompressAndDisplayMarkdown() {
             const compressedURI = window.location.hash.substr(1);
-            // Decompress the text
-            const decompressedMarkdown = LZString.decompressFromEncodedURIComponent(compressedURI);
-            // Initialize Showdown converter
-            const converter = new showdown.Converter();
-            // Convert Markdown to HTML
-            const htmlContent = converter.makeHtml(decompressedMarkdown);
-            // Display the HTML content
-            document.getElementById('content').innerHTML = htmlContent;
+            if (compressedURI) {
+                const decompressedMarkdown = LZString.decompressFromEncodedURIComponent(compressedURI);
+                const converter = new showdown.Converter();
+                const htmlContent = converter.makeHtml(decompressedMarkdown);
+                document.getElementById('content').innerHTML = htmlContent;
+            } else {
+                // Ici, vous pouvez définir ou charger un contenu par défaut si aucun hash n'est fourni dans l'URL
+                const defaultCompressedURI = "MQAgmg9grgTiDqBTARgZwJYBdEgCLpkQGNMAbATxHQDsQBDEAZRoHNScAZGgawCheAVAKRosiALQZqbCaR5CQyKOlIATEOWhwRGbHgLEylGvSat2ILtW4A6foF4NwD07QgAoQYmOsnYLxG6CCqENQA5Jgg1IiI6gyoiDAAbvEgmBAgABYQqOGY6YgAtiAgvPaAgjuuMOgJdNi+ERC5rFSoIHHUORCAyATuramE6sGdAPqNqEOt8UlwxYBDJIDwf0IAsnQw3EEA7tR165V6mrAgAA50LDjrWOkg+StrEJsgPQASACqLHPzP6egtujjfVNRUIcDOpkJQhABtACSmEwlGQWDhAF0ABTpWGHVAALgA9DiWBcoMgbEQIPkcXRSKSYDjEeRxAjYeQAJQ2IT8DiIFa0fLuRBYooQgDiWEeRNR6MwmNx+MJxNJ5NUiHW4joUFS10w3xq6GCOPWKF+knMsh4zP4AB4iIh2vEAHy8CGAPOoQABhQg1HAMSLrVpiEAAQhAgBzqVE2HHRLDuGzo-Kkc0WnHW20wB38IA";
+                const decompressedMarkdown = LZString.decompressFromEncodedURIComponent(defaultCompressedURI);
+                const converter = new showdown.Converter();
+                const htmlContent = converter.makeHtml(decompressedMarkdown);
+                document.getElementById('content').innerHTML = htmlContent;
+            }
         }
-    }
 
-    // Wait for the DOM to be fully loaded before converting and displaying the Markdown
-    window.addEventListener('DOMContentLoaded', (event) => {
-        decompressAndDisplayMarkdown();
-    });
-</script>
+        // Exécuter au chargement initial de la page
+        window.addEventListener('DOMContentLoaded', (event) => {
+            decompressAndDisplayMarkdown();
+        });
 
+        // Écouteur pour détecter les changements d'URL lorsque le fragment (hash) change
+        window.addEventListener('hashchange', (event) => {
+            decompressAndDisplayMarkdown();
+        });
+    </script>
 </body>
 </html>
