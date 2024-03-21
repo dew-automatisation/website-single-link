@@ -25,6 +25,9 @@
                 <button onclick="generateQRCode()" class="btn btn-info btn-block mt-2">Generate QR Code</button>
             </div>
             <p id="urlByteSize" class="text-center mt-3">URL size: 0 bytes</p>
+			<div class="text-center mt-2">
+                <a href="https://pandao.github.io/editor.md/en.html" target="_blank">Markdown editor</a>
+            </div>
         </div>
     </div>
 </div>
@@ -36,7 +39,7 @@
         document.getElementById('outputBase64').value = compressed;
         
         var currentUrl = window.location.href;
-        var baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")) + "/index.html";
+        var baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")) + "/";
         var finalUrl = baseUrl + '#' + compressed;
         document.getElementById('outputUrl').value = finalUrl;
         
