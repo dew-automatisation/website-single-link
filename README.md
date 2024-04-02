@@ -10,6 +10,10 @@ This site is inspired by **[Itty bitty](https://github.com/alcor/itty-bitty).**
 
 Learn more:  [GitHub](https://github.com/dew-automatisation/website-single-link)
 
+Instance :
+- [https://site.devenirentrepreneurweb.fr](https://site.devenirentrepreneurweb.fr)]
+- [https://urlsite.gitlab.io/s/](https://urlsite.gitlab.io/s/)
+
 [⮞ Create a new site ! ⮜](https://site.devenirentrepreneurweb.fr/editor.html)
 
 
