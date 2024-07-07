@@ -15,6 +15,8 @@ Learn more:  [GitHub](https://github.com/dew-automatisation/website-single-link)
 - [https://site.devenirentrepreneurweb.fr](https://site.devenirentrepreneurweb.fr)]
 - [https://urlsite.gitlab.io/s/](https://urlsite.gitlab.io/s/)
 
+Example of page create with the tool : https://lc.cx/Hpp0Uy
+
 [⮞ Create a new site ! ⮜](https://site.devenirentrepreneurweb.fr/editor.html)
 
 
