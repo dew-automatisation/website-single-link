@@ -2,7 +2,7 @@
 
 **Website-single-link** build your Website Directly in a Single Link.
 
-💼**Portable** - you don't need a server to host them  
+💼**Simple** - simple, no need of a big server
 👁**Private** - nothing is sent to–or stored on–_this_ server  
 Ⓜ️**Markdown** - write your page with markdown or HTML
 
